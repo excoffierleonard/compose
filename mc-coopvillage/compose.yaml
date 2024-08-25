@@ -1,0 +1,24 @@
+services:
+  mc-coopvillage:
+    image: excoffierleonard/minecraft-server:java8
+    container_name: mc-coopvillage
+    environment:
+      - TZ=America/New_York
+      - JAVA_XMX=4096M
+      - JAVA_XMS=4096M
+      - SERVER_NAME=1.14.4-bukkit.jar
+    ports:
+      - "25568:25565"
+      - "25578:25575"
+    volumes:
+      - minecraft-java-1.14.4-bukkit-coopvillage:/minecraft-server/server-data
+    networks:
+      - jisoonet
+
+volumes:
+  minecraft-java-1.14.4-bukkit-coopvillage:
+    name: minecraft-java-1.14.4-bukkit-coopvillage
+
+networks:
+  jisoonet:
+    name: jisoonet

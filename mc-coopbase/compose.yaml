@@ -1,0 +1,24 @@
+services:
+  mc-coopbase:
+    image: excoffierleonard/minecraft-server:java8
+    container_name: mc-coopbase
+    environment:
+      - TZ=America/New_York
+      - JAVA_XMX=4096M
+      - JAVA_XMS=4096M
+      - SERVER_NAME=1.16.3-paper.jar
+    ports:
+      - "25567:25565"
+      - "25577:25575"
+    volumes:
+      - minecraft-java-1.16.3-paper-coopbase:/minecraft-server/server-data/
+    networks:
+      - jisoonet
+
+volumes:
+  minecraft-java-1.16.3-paper-coopbase:
+    name: minecraft-java-1.16.3-paper-coopbase
+
+networks:
+  jisoonet:
+    name: jisoonet

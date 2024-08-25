@@ -1,0 +1,28 @@
+services:
+  duplicacy-web:
+    image: saspus/duplicacy-web
+    container_name: duplicacy-web
+    environment:
+      TZ: America/New_York
+      USR_ID: '99'
+      GRP_ID: '100'
+    ports:
+      - "3875:3875/tcp"
+    volumes:
+      - duplicacy-web-config:/config
+      - duplicacy-web-cache:/cache
+      - duplicacy-web-logs:/logs
+    networks:
+      - jisoonet
+
+volumes:
+  duplicacy-web-config:
+    name: duplicacy-web-config
+  duplicacy-web-cache:
+    name: duplicacy-web-cache
+  duplicacy-web-logs:
+    name: duplicacy-web-logs
+
+networks:
+  jisoonet:
+    name: jisoonet

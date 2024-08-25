@@ -1,0 +1,25 @@
+services:
+  mc-perso1:
+    image: excoffierleonard/minecraft-server:java17
+    container_name: mc-perso1
+    environment:
+      JAVA_XMX: 4096M
+      JAVA_XMS: 4096M
+      SERVER_NAME: 1.20.4-fabric.jar
+      TZ: America/New_York
+    ports:
+      - "25570:25565/tcp"
+      - "25580:25575/tcp"
+    volumes:
+      - minecraft-java-1.20.4-fabric-perso1:/minecraft-server/server-data/
+    networks:
+      - jisoonet
+
+volumes:
+  minecraft-java-1.20.4-fabric-perso1:
+    name: minecraft-java-1.20.4-fabric-perso1
+
+networks:
+  jisoonet:
+    name: jisoonet
+

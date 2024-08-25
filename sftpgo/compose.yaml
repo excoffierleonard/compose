@@ -1,0 +1,26 @@
+services:
+  sftpgo:
+    image: drakkan/sftpgo
+    container_name: sftpgo
+    environment:
+      - TZ=America/New_York
+      - SFTPGO_COMMON__DEFENDER__ENABLED=true
+      - SFTPGO_FTPD__BINDINGS__0__DEBUG=0
+    ports:
+      - "2221:8080"
+      - "522:2022"
+    volumes:
+      - sftpgo:/var/lib/sftpgo
+      - /mnt/zmain/dump/:/unraid
+    networks:
+      - jisoonet
+    user: "99:100"
+
+volumes:
+  sftpgo:
+    name: sftpgo
+
+networks:
+  jisoonet:
+    name: jisoonet
+

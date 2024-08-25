@@ -1,0 +1,127 @@
+services:
+  qbittorrent-arr:
+    image: ghcr.io/hotio/qbittorrent
+    container_name: qbittorrent-arr
+    environment:
+      - TZ=America/New_York
+      - PUID=99
+      - PGID=100
+      - UMASK=002
+    ports:
+      - "8080:8080"
+    volumes:
+      - qbittorrent-arr:/config
+      - /mnt/zmain/streaming/torrents/:/streaming/torrents
+    networks:
+      - jisoonet
+
+  jackett:
+    image: lscr.io/linuxserver/jackett
+    container_name: jackett
+    environment:
+      - TZ=America/New_York
+      - AUTO_UPDATE=true
+      - PUID=99
+      - PGID=100
+      - UMASK=022
+    ports:
+      - "9117:9117/tcp"
+    volumes:
+      - jackett:/config
+    networks:
+      - jisoonet
+
+  radarr:
+    image: lscr.io/linuxserver/radarr
+    container_name: radarr
+    environment:
+      - TZ=America/New_York
+      - PUID=99
+      - PGID=100
+      - UMASK=022
+    ports:
+      - "7878:7878/tcp"
+    volumes:
+      - radarr:/config
+      - /mnt/zmain/streaming/:/streaming
+    networks:
+      - jisoonet
+    depends_on:
+      - jackett
+      - qbittorrent-arr
+
+  sonarr:
+    image: lscr.io/linuxserver/sonarr
+    container_name: sonarr
+    environment:
+      - TZ=America/New_York
+      - PUID=99
+      - PGID=100
+      - UMASK=022
+    ports:
+      - "8989:8989"
+    volumes:
+      - sonarr:/config
+      - /mnt/zmain/streaming/:/streaming
+    networks:
+      - jisoonet
+    depends_on:
+      - jackett
+      - qbittorrent-arr
+
+  lidarr:
+    image: lscr.io/linuxserver/lidarr
+    container_name: lidarr
+    environment:
+      - TZ=America/New_York
+      - PUID=99
+      - PGID=100
+      - UMASK=022
+    ports:
+      - "8686:8686/tcp"
+    volumes:
+      - lidarr:/config
+      - /mnt/zmain/streaming/:/streaming
+    networks:
+      - jisoonet
+    depends_on:
+      - jackett
+      - qbittorrent-arr
+
+  prowlarr:
+    image: lscr.io/linuxserver/prowlarr
+    container_name: prowlarr
+    environment:
+      - TZ=America/New_York
+      - PUID=99
+      - PGID=100
+      - UMASK=022
+    ports:
+      - "9696:9696/tcp"
+    volumes:
+      - prowlarr:/config
+    networks:
+      - jisoonet
+    depends_on:
+      - qbittorrent-arr
+      - radarr
+      - sonarr
+      - lidarr
+
+volumes:
+  qbittorrent-arr:
+    name: qbittorrent-arr
+  jackett:
+    name: jackett
+  radarr:
+    name: radarr
+  sonarr:
+    name: sonarr
+  lidarr:
+    name: lidarr
+  prowlarr:
+    name: prowlarr
+
+networks:
+  jisoonet:
+    name: jisoonet

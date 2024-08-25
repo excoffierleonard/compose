@@ -1,0 +1,27 @@
+services:
+  debian12:
+    image: excoffierleonard/debian:12
+    container_name: debian12
+    environment:
+      TZ: "America/New_York"
+    ports:
+      - "4321:4321/tcp"
+      - "4321:4321/udp"
+    volumes:
+      - debian12:/mnt/debian12
+      - /mnt/zmain/dump/:/mnt/dump
+    networks:
+      - jisoo-iso
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [gpu]
+
+volumes:
+  debian12:
+    name: debian12
+
+networks:
+  jisoo-iso:
+    name: jisoo-iso

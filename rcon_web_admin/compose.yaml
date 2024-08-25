@@ -1,0 +1,25 @@
+services:
+  rcon_web_admin:
+    image: itzg/rcon
+    container_name: rcon_web_admin
+    environment:
+      TZ: "America/New_York"
+      RWA_ADMIN: "TRUE"
+      RWA_USERNAME: "root"
+      RWA_PASSWORD: ${RWA_PASSWORD}
+      RWA_ENV: "False"
+    ports:
+      - "4326:4326"
+      - "4327:4327"
+    volumes:
+      - rcon_web_admin:/opt/rcon-web-admin/db
+    networks:
+      - jisoonet
+
+volumes:
+  rcon_web_admin:
+    name: rcon_web_admin
+
+networks:
+  jisoonet:
+    name: jisoonet

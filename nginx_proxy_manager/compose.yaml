@@ -1,0 +1,27 @@
+services:
+  nginx_proxy_manager:
+    image: jlesage/nginx-proxy-manager
+    container_name: nginx_proxy_manager
+    environment:
+      TZ: America/New_York
+      USER_ID: '99'
+      GROUP_ID: '100'
+      UMASK: '0000'
+      APP_NICENESS: '0'
+      DISABLE_IPV6: '0'
+    ports:
+      - '7818:8181'
+      - '80:8080'
+      - '443:4443'
+    volumes:
+      - nginx_proxy_manager:/config
+    networks:
+      - jisoonet
+
+volumes:
+  nginx_proxy_manager:
+    name: nginx_proxy_manager
+
+networks:
+  jisoonet:
+    name: jisoonet

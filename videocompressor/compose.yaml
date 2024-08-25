@@ -1,0 +1,19 @@
+services:
+  videocompressor:
+    image: excoffierleonard/videocompressor:1.0
+    container_name: videocompressor
+    environment:
+      - TZ=America/New_York
+    ports:
+      - "5123:5123"
+    networks:
+      - jisoonet
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [gpu]
+            
+networks:
+  jisoonet:
+    name: jisoonet

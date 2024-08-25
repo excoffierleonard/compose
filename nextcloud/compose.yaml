@@ -1,0 +1,50 @@
+services:
+  redis-nextcloud:
+    image: redis
+    container_name: redis-nextcloud
+    environment:
+      - TZ=America/New_York
+    networks:
+      - jisoonet
+
+  mariadb-nextcloud:
+    image: mariadb
+    container_name: mariadb-nextcloud
+    environment:
+      TZ: "America/New_York"
+      MARIADB_RANDOM_ROOT_PASSWORD: ''
+      MARIADB_DATABASE: ${MARIADB_DATABASE}
+      MARIADB_USER: ${MARIADB_USER}
+      MARIADB_PASSWORD: ${MARIADB_PASSWORD}
+      MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD}
+    volumes:
+      - mariadb-nextcloud:/var/lib/mysql
+    networks:
+      - jisoonet
+
+  nextcloud:
+    image: nextcloud
+    container_name: nextcloud
+    environment:
+      - TZ=America/New_York
+    ports:
+      - "8666:80"
+    user: "99:100"
+    volumes:
+      - nextcloud:/var/www/html
+      - /mnt/zmain/el:/mnt/el
+    networks:
+      - jisoonet
+    depends_on:
+      - mariadb-nextcloud
+      - redis-nextcloud
+
+volumes:
+  mariadb-nextcloud:
+    name: mariadb-nextcloud
+  nextcloud:
+    name: nextcloud
+
+networks:
+  jisoonet:
+    name: jisoonet

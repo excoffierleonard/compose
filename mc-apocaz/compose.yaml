@@ -1,0 +1,24 @@
+services:
+  mc-apocaz:
+    image: excoffierleonard/minecraft-server:java8
+    container_name: mc-apocaz
+    environment:
+      - TZ=America/New_York
+      - JAVA_XMX=4096M
+      - JAVA_XMS=4096M
+      - SERVER_NAME=1.12.2-forge.jar
+    ports:
+      - "25569:25565"
+      - "25579:25575"
+    volumes:
+      - minecraft-java-1.12.2-forge-apocaz:/minecraft-server/server-data
+    networks:
+      - jisoonet
+
+volumes:
+  minecraft-java-1.12.2-forge-apocaz:
+    name: minecraft-java-1.12.2-forge-apocaz
+
+networks:
+  jisoonet:
+    name: jisoonet

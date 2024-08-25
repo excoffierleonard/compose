@@ -1,0 +1,22 @@
+services:
+  portainer:
+    image: portainer/portainer-ce:latest
+    container_name: portainer
+    environment:
+      TZ: "America/New_York"
+    ports:
+      - "9000:9000"
+      - "8000:8000"
+    volumes:
+      - portainer:/data
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - jisoonet
+
+volumes:
+  portainer:
+    name: portainer
+
+networks:
+  jisoonet:
+    name: jisoonet

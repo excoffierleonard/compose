@@ -1,0 +1,25 @@
+services:
+  filezilla:
+    image: lscr.io/linuxserver/filezilla
+    container_name: filezilla
+    environment:
+      TZ: "America/New_York"
+      PUID: "99"
+      PGID: "100"
+      UMASK: "022"
+    ports:
+      - "3002:3000"
+      - "3001:3001"
+    volumes:
+      - /mnt/zmain/dump/:/dump
+      - filezilla:/config
+    networks:
+      - jisoonet
+
+volumes:
+  filezilla:
+    name: filezilla
+
+networks:
+  jisoonet:
+    name: jisoonet

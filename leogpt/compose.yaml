@@ -1,0 +1,18 @@
+services:
+  leogpt:
+    image: excoffierleonard/leogpt:1.0
+    container_name: leogpt
+    environment:
+      TZ: "America/New_York"
+    volumes:
+      - leogpt:/leogpt/config
+    networks:
+      - jisoonet
+
+volumes:
+  leogpt:
+    name: leogpt
+
+networks:
+  jisoonet:
+    name: jisoonet

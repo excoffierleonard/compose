@@ -1,0 +1,61 @@
+services:
+  photoprism:
+    image: photoprism/photoprism
+    container_name: photoprism
+    environment:
+      TZ: America/New_York
+      PHOTOPRISM_UPLOAD_NSFW: "true"
+      PHOTOPRISM_DETECT_NSFW: "false"
+      PHOTOPRISM_SITE_TITLE: ''
+      PHOTOPRISM_SITE_CAPTION: ''
+      PHOTOPRISM_SITE_DESCRIPTION: ''
+      PHOTOPRISM_SITE_AUTHOR: ''
+      PHOTOPRISM_ADMIN_PASSWORD: ${PHOTOPRISM_ADMIN_PASSWORD}
+      PHOTOPRISM_DATABASE_DRIVER: MariaDB
+      PHOTOPRISM_DATABASE_DSN: ${PHOTOPRISM_DATABASE_DSN}
+      PHOTOPRISM_AUTO_INDEX: "0"
+      PHOTOPRISM_AUTO_IMPORT: "0"
+      PHOTOPRISM_SETTINGS_HIDDEN: "false"
+      PHOTOPRISM_THUMB_UNCACHED: "false"
+      PHOTOPRISM_THUMB_SIZE: "2048"
+      PHOTOPRISM_THUMB_SIZE_UNCACHED: "7680"
+      PHOTOPRISM_JPEG_SIZE: "7680"
+      PHOTOPRISM_JPEG_QUALITY: "90"
+      PHOTOPRISM_DARKTABLE_PRESETS: "false"
+      PHOTOPRISM_THUMB_FILTER: lanczos
+      PHOTOPRISM_EXPERIMENTAL: "false"
+      PHOTOPRISM_UID: "99"
+      PHOTOPRISM_GID: "100"
+      PHOTOPRISM_STORAGE_PATH: /photoprism/storage
+    ports:
+      - "2342:2342/tcp"
+    volumes:
+      - photoprism:/photoprism/storage
+      - /mnt/zmain/el/image/photos/:/photoprism/originals
+    networks:
+      - jisoonet
+
+  mariadb-photoprism:
+    image: mariadb
+    container_name: mariadb-photoprism
+    environment:
+      TZ: "America/New_York"
+      MARIADB_RANDOM_ROOT_PASSWORD: ''
+      MARIADB_DATABASE: ${MARIADB_DATABASE}
+      MARIADB_USER: ${MARIADB_USER}
+      MARIADB_PASSWORD: ${MARIADB_PASSWORD}
+      MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD}
+    volumes:
+      - mariadb-photoprism:/var/lib/mysql
+    networks:
+      - jisoonet
+
+volumes:
+  photoprism:
+    name: photoprism
+  mariadb-photoprism:
+    name: mariadb-photoprism
+
+networks:
+  jisoonet:
+    name: jisoonet

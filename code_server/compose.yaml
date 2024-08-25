@@ -1,0 +1,26 @@
+services:
+  code_server:
+    image: lscr.io/linuxserver/code-server
+    container_name: code_server
+    environment:
+      TZ: America/New_York
+      PASSWORD: ${PASSWORD}
+      SUDO_PASSWORD: ${SUDO_PASSWORD}
+      DEFAULT_WORKSPACE: /config/workspace
+      PUID: 99
+      PGID: 100
+      UMASK: 022
+    ports:
+      - "8443:8443"
+    volumes:
+      - code_server:/config
+    networks:
+      - jisoonet
+
+volumes:
+  code_server:
+    name: code_server
+
+networks:
+  jisoonet:
+    name: jisoonet

@@ -1,0 +1,14 @@
+services:
+  backgroundremover:
+    image: excoffierleonard/background-remover:1.0
+    container_name: backgroundremover
+    environment:
+      - TZ=America/New_York
+    ports:
+      - '5124:5124'
+    networks:
+      - jisoonet
+
+networks:
+  jisoonet:
+    name: jisoonet

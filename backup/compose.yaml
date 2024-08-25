@@ -1,0 +1,84 @@
+services:
+  duplicacy_b2-boot:
+    image: excoffierleonard/duplicacy_b2
+    container_name: duplicacy_b2-boot
+    environment:
+      DUPLICACY_PASSWORD: ${DUPLICACY_PASSWORD}
+      DUPLICACY_B2_ID: ${DUPLICACY_B2_ID}
+      DUPLICACY_B2_KEY: ${DUPLICACY_B2_KEY}
+      SNAPSHOT_ID: ${BOOT_SNAPSHOT_ID}
+      B2_URL: ${BOOT_B2_URL}
+      THREADS: ${THREADS}
+      TZ: ${TZ}
+    volumes:
+      - duplicacy_b2-boot:/duplicacy/appdata
+      - ${BOOT_BACKUP_PATH_1}:/duplicacy/backup/${BOOT_BACKUP_FOLDER_NAME_1}
+    networks:
+      - duplicacy_b2
+
+  duplicacy_b2-cache:
+    image: excoffierleonard/duplicacy_b2
+    container_name: duplicacy_b2-cache
+    environment:
+      DUPLICACY_PASSWORD: ${DUPLICACY_PASSWORD}
+      DUPLICACY_B2_ID: ${DUPLICACY_B2_ID}
+      DUPLICACY_B2_KEY: ${DUPLICACY_B2_KEY}
+      SNAPSHOT_ID: ${CACHE_SNAPSHOT_ID}
+      B2_URL: ${CACHE_B2_URL}
+      THREADS: ${THREADS}
+      TZ: ${TZ}
+    volumes:
+      - duplicacy_b2-cache:/duplicacy/appdata
+      - ${CACHE_BACKUP_PATH_1}:/duplicacy/backup/${CACHE_BACKUP_FOLDER_NAME_1}
+      - ${CACHE_BACKUP_PATH_2}:/duplicacy/backup/${CACHE_BACKUP_FOLDER_NAME_2}
+      - ${CACHE_BACKUP_PATH_3}:/duplicacy/backup/${CACHE_BACKUP_FOLDER_NAME_3}
+      - ${CACHE_BACKUP_PATH_4}:/duplicacy/backup/${CACHE_BACKUP_FOLDER_NAME_4}
+    networks:
+      - duplicacy_b2
+
+  duplicacy_b2-zmain:
+    image: excoffierleonard/duplicacy_b2
+    container_name: duplicacy_b2-zmain
+    environment:
+      DUPLICACY_PASSWORD: ${DUPLICACY_PASSWORD}
+      DUPLICACY_B2_ID: ${DUPLICACY_B2_ID}
+      DUPLICACY_B2_KEY: ${DUPLICACY_B2_KEY}
+      SNAPSHOT_ID: ${ZMAIN_SNAPSHOT_ID}
+      B2_URL: ${ZMAIN_B2_URL}
+      THREADS: ${THREADS}
+      TZ: ${TZ}
+    volumes:
+      - duplicacy_b2-zmain:/duplicacy/appdata
+      - ${ZMAIN_BACKUP_PATH_1}:/duplicacy/backup/${ZMAIN_BACKUP_FOLDER_NAME_1}
+      - ${ZMAIN_BACKUP_PATH_2}:/duplicacy/backup/${ZMAIN_BACKUP_FOLDER_NAME_2}
+    networks:
+      - duplicacy_b2
+
+  rclone:
+    image: excoffierleonard/rclone:1.0
+    container_name: rclone
+    environment:
+      TZ: "America/New_York"
+    volumes:
+      - rclone:/rclone/appdata/
+      - /boot/:/backupsource/boot/
+      - /mnt/zmain/backup/:/backupsource/backup/
+      - /mnt/zmain/el/:/backupsource/el/
+    networks:
+      - jisoonet
+
+volumes:
+  duplicacy_b2-boot:
+    name: duplicacy_b2-boot
+  duplicacy_b2-cache:
+    name: duplicacy_b2-cache
+  duplicacy_b2-zmain:
+    name: duplicacy_b2-zmain
+  rclone:
+    name: rclone
+
+networks:
+  duplicacy_b2:
+    name: duplicacy_b2
+  jisoonet:
+    name: jisoonet

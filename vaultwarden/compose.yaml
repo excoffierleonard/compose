@@ -1,0 +1,25 @@
+services:
+  vaultwarden:
+    image: vaultwarden/server
+    container_name: vaultwarden
+    environment:
+      TZ: "America/New_York"
+      SIGNUPS_ALLOWED: 'false'
+      INVITATIONS_ALLOWED: 'false'
+      WEBSOCKET_ENABLED: 'true'
+      ADMIN_TOKEN: ${ADMIN_TOKEN}
+    ports:
+      - "4743:80"
+    volumes:
+      - vaultwarden:/data
+    networks:
+      - jisoonet
+
+volumes:
+  vaultwarden:
+    name: vaultwarden
+
+networks:
+  jisoonet:
+    name: jisoonet
+

@@ -1,0 +1,24 @@
+services:
+  mc-coopcave:
+    image: excoffierleonard/minecraft-server:java17
+    container_name: mc-coopcave
+    environment:
+      TZ: "America/New_York"
+      JAVA_XMX: "4096M"
+      JAVA_XMS: "4096M"
+      SERVER_NAME: "1.19.1-spigot.jar"
+    ports:
+      - "25566:25565/tcp"
+      - "25576:25575/tcp"
+    volumes:
+      - minecraft-java-1.19.1-spigot-coopcave:/minecraft-server/server-data/
+    networks:
+      - jisoonet
+
+volumes:
+  minecraft-java-1.19.1-spigot-coopcave:
+    name: minecraft-java-1.19.1-spigot-coopcave
+
+networks:
+  jisoonet:
+    name: jisoonet

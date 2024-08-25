@@ -1,0 +1,35 @@
+services:
+  jellyfin:
+    image: lscr.io/linuxserver/jellyfin
+    container_name: jellyfin
+    environment:
+      TZ: America/New_York
+      PUID: 99
+      PGID: 100
+      UMASK: '022'
+    ports:
+      - "8096:8096/tcp"
+      - "7359:7359/udp"
+      - "1900:1900/udp"
+    volumes:
+      - jellyfin-config:/config
+      - jellyfin-transcode:/transcode
+      - /mnt/zmain/streaming/media/:/streaming/media
+    networks:
+      - jisoonet
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [gpu]
+
+
+volumes:
+  jellyfin-config:
+    name: jellyfin-config
+  jellyfin-transcode:
+    name: jellyfin-transcode
+
+networks:
+  jisoonet:
+    namme: jisoonet

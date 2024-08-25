@@ -1,0 +1,24 @@
+services:
+  teamspeak:
+    image: binhex/arch-teamspeak
+    container_name: teamspeak
+    environment:
+      - TZ=America/New_York
+      - UMASK=000
+      - PUID=99
+      - PGID=100
+    ports:
+      - "9987:9987/udp"
+      - "30033:30033/tcp"
+    volumes:
+      - teamspeak:/config
+    networks:
+      - jisoonet
+
+volumes:
+  teamspeak:
+    name: teamspeak
+
+networks:
+  jisoonet:
+    name: jisoonet

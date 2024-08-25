@@ -1,0 +1,16 @@
+services:
+  adminer:
+    image: adminer
+    container_name: adminer
+    environment:
+      TZ: "America/New_York"
+      ADMINER_DESIGN: "hydra"
+      ADMINER_PLUGINS: ""
+    ports:
+      - "48080:8080"
+    networks:
+      - jisoonet
+
+networks:
+  jisoonet:
+    name: jisoonet

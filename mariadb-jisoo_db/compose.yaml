@@ -1,0 +1,26 @@
+services:
+  mariadb-jisoo_db:
+    image: mariadb
+    container_name: mariadb-jisoo_db
+    environment:
+      - TZ=America/New_York
+      - MARIADB_RANDOM_ROOT_PASSWORD=
+      - MARIADB_DATABASE=${MARIADB_DATABASE}
+      - MARIADB_USER=${MARIADB_USER}
+      - MARIADB_PASSWORD=${MARIADB_PASSWORD}
+      - MARIADB_ROOT_PASSWORD=${MARIADB_ROOT_PASSWORD}
+    ports:
+      - 3307:3306
+    volumes:
+      - mariadb-jisoo_db:/var/lib/mysql
+    networks:
+      - jisoonet
+
+volumes:
+  mariadb-jisoo_db:
+    name: mariadb-jisoo_db
+
+networks:
+  jisoonet:
+    name: jisoonet
+
