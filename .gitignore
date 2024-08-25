@@ -1,1 +1,5 @@
+# Environments Variables
 .env
+
+# Docker Backup Directory
+docker-backups/
