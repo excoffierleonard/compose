@@ -1,0 +1,25 @@
+services:
+  mariadb-stockdb:
+    image: mariadb
+    container_name: mariadb-stockdb
+    environment:
+      - TZ=America/New_York
+      - MARIADB_DATABASE=${MARIADB_DATABASE}
+      - MARIADB_USER=${MARIADB_USER}
+      - MARIADB_PASSWORD=${MARIADB_PASSWORD}
+      - MARIADB_ROOT_PASSWORD=${MARIADB_ROOT_PASSWORD}
+    ports:
+      - "3311:3306"
+    volumes:
+      - mariadb-stockdb:/var/lib/mysql
+    networks:
+      - jisoonet
+
+volumes:
+  mariadb-stockdb:
+    name: mariadb-stockdb
+
+networks:
+  jisoonet:
+    name: jisoonet
+
