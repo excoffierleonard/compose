@@ -1,0 +1,8 @@
+services:
+  downdetector:
+    image: excoffierleonard/downdetector
+    container_name: downdetector
+    environment:
+      WEBSITES: ${WEBSITES}
+      WEBHOOK_URL: ${WEBHOOK_URL}
+      DISCORD_ID: ${DISCORD_ID}

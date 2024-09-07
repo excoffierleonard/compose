@@ -1,0 +1,9 @@
+services:
+  excoffierleonard.com:
+    image: excoffierleonard/excoffierleonard.com
+    container_name: excoffierleonard.com
+    ports:
+      - "8080:80"
+      - "4343:443"
+    volumes:
+      - ./ssl:/ssl
