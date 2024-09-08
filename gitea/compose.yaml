@@ -1,0 +1,42 @@
+services:
+  mariadb-gitea:
+    image: mariadb
+    container_name: mariadb-gitea
+    environment:
+      TZ: "America/New_York"
+      MARIADB_RANDOM_ROOT_PASSWORD: ''
+      MARIADB_DATABASE: ${MARIADB_DATABASE}
+      MARIADB_USER: ${MARIADB_USER}
+      MARIADB_PASSWORD: ${MARIADB_PASSWORD}
+      MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD}
+    volumes:
+      - mariadb-gitea:/var/lib/mysql
+    networks:
+      - jisoonet
+  
+  gitea:
+    image: gitea/gitea
+    container_name: gitea
+    environment:
+      - TZ=America/New_York
+      - USER_UID=1000
+      - USER_GID=1000
+    ports:
+      - "9122:22"
+      - "9143:3000"
+    volumes:
+      - gitea:/data
+    networks:
+      - jisoonet
+    depends_on:
+      - mariadb-gitea
+
+volumes:
+  gitea:
+    name: gitea
+  mariadb-gitea:
+    name: mariadb-gitea
+
+networks:
+  jisoonet:
+    name: jisoonet
