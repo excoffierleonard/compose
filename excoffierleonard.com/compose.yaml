@@ -7,3 +7,4 @@ services:
       - "4343:443"
     volumes:
       - ./ssl:/ssl
+      - /mnt/zmain/repo:/var/www/html/repo
