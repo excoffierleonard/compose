@@ -1,6 +1,6 @@
 services:
   leogpt:
-    image: excoffierleonard/leogpt:1.0
+    image: git.jisoonet.com/el/discordgpt
     container_name: leogpt
     environment:
       TZ: "America/New_York"

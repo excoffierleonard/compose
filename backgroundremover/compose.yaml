@@ -1,6 +1,6 @@
 services:
   backgroundremover:
-    image: excoffierleonard/background-remover:1.0
+    image: git.jisoonet.com/el/backgroundremover
     container_name: backgroundremover
     environment:
       - TZ=America/New_York

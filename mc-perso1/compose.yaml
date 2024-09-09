@@ -1,6 +1,6 @@
 services:
   mc-perso1:
-    image: excoffierleonard/minecraft-server:java17
+    image: git.jisoonet.com/el/minecraftserver:java17
     container_name: mc-perso1
     environment:
       JAVA_XMX: 4096M

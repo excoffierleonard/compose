@@ -1,6 +1,6 @@
 services:
   debian12:
-    image: excoffierleonard/debian:12
+    image: git.jisoonet.com/el/debian:12
     container_name: debian12
     environment:
       TZ: "America/New_York"

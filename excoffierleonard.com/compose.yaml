@@ -1,6 +1,6 @@
 services:
   excoffierleonard.com:
-    image: excoffierleonard/excoffierleonard.com
+    image: git.jisoonet.com/el/excoffierleonard.com
     container_name: excoffierleonard.com
     ports:
       - "8080:80"

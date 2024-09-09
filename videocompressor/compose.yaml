@@ -1,6 +1,6 @@
 services:
   videocompressor:
-    image: excoffierleonard/videocompressor:1.0
+    image: git.jisoonet.com/el/videocompressor
     container_name: videocompressor
     environment:
       - TZ=America/New_York

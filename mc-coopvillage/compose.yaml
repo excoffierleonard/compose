@@ -1,6 +1,6 @@
 services:
   mc-coopvillage:
-    image: excoffierleonard/minecraft-server:java8
+    image: git.jisoonet.com/el/minecraftserver:java8
     container_name: mc-coopvillage
     environment:
       - TZ=America/New_York

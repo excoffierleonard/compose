@@ -1,6 +1,6 @@
 services:
   downdetector:
-    image: excoffierleonard/downdetector
+    image: git.jisoonet.com/el/downdetector
     container_name: downdetector
     environment:
       WEBSITES: ${WEBSITES}

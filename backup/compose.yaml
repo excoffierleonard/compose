@@ -55,7 +55,7 @@ services:
       - duplicacy_b2
 
   rclone:
-    image: excoffierleonard/rclone:1.0
+    image: git.jisoonet.com/el/rclone
     container_name: rclone
     environment:
       TZ: "America/New_York"

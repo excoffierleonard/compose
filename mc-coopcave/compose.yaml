@@ -1,6 +1,6 @@
 services:
   mc-coopcave:
-    image: excoffierleonard/minecraft-server:java17
+    image: git.jisoonet.com/el/minecraftserver:java17
     container_name: mc-coopcave
     environment:
       TZ: "America/New_York"
