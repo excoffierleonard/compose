@@ -5,7 +5,7 @@ services:
     environment:
       TZ: "America/New_York"
     volumes:
-      - leogpt:/leogpt/config
+      - leogpt:/discordgpt/config
     networks:
       - jisoonet
 
