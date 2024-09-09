@@ -7,9 +7,9 @@ Welcome to the Docker Compose Repository! This repository contains all the Docke
 ## 📂 Repository Structure
 
 - **[project1/](./project1)**
-  - `docker-compose.yml` - Docker Compose for Project 1.
+  - `compose.yml` - Docker Compose for Project 1.
 - **[project2/](./project2)**
-  - `docker-compose.yml` - Docker Compose for Project 2.
+  - `compose.yml` - Docker Compose for Project 2.
 - **[docker-backups/](./docker-backups/)** (Generated automatically)
   - This directory is where backup files are stored.
 - **[backup-script.sh](./backup-script.sh)**
