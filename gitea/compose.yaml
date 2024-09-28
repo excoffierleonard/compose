@@ -30,12 +30,34 @@ services:
       - jisoonet
     depends_on:
       - mariadb-gitea
+  
+  gitea-runner:
+    image: gitea/gitea-runner
+    container_name: gitea-runner
+    environment:
+      - TZ=America/New_York
+      - CONFIG_FILE=/conf/config.yaml
+      - GITEA_RUNNER_REGISTRATION_TOKEN=${GITEA_RUNNER_REGISTRATION_TOKEN}
+      - GITEA_RUNNER_NAME=gitea-runner
+      - GITEA_INSTANCE_URL=http://gitea:3000
+    volumes:
+      - gitea-runner-data:/data
+      - gitea-runner-conf:/conf
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - jisoonet
+    depends_on:
+      - gitea
 
 volumes:
   gitea:
     name: gitea
   mariadb-gitea:
     name: mariadb-gitea
+  gitea-runner-data:
+    name: gitea-runner-data
+  gitea-runner-conf:
+    name: gitea-runner-conf
 
 networks:
   jisoonet:
